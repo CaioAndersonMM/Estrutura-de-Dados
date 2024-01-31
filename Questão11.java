@@ -9,7 +9,7 @@ public class Questão11 {
         System.out.println("Quanto quer transferir?");
         float transferencia = sc.nextFloat();
 
-        if (conta1 > transferencia) {
+        if (conta1 >= transferencia) {
             conta1 -= transferencia;
             conta2 += transferencia;
             System.out.println("Sucesso");
