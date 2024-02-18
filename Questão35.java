@@ -1,5 +1,7 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -24,6 +26,8 @@ public class Questão35 {
         System.out.println("Resultado será salvo em .csv");
         String diretorioAtual = System.getProperty("user.dir");
         String caminhoArquivo = diretorioAtual + "/palavras.csv";
+
+        //ou String caminho Arquivo = "palavras.csv";
 
         System.out.println(caminhoArquivo);
 
@@ -57,8 +61,35 @@ public class Questão35 {
         } catch (Exception e) {
             e.printStackTrace();
         }
-      
 
+        //Outra forma
+        try {
+            String textoSaida = leitor2(caminhoArquivo);
+            System.out.println(textoSaida);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+      
         sc.close();
+    
+    }
+
+    public static String leitor2(String caminho) throws IOException{
+        
+        BufferedReader bufferedReader = new BufferedReader( new FileReader(caminho) );
+
+        StringBuffer sbResult = new StringBuffer();
+
+        String linha = bufferedReader.readLine();
+
+        while (linha != null) {
+            sbResult.append(linha + "\n");
+
+            linha = bufferedReader.readLine();
+        }
+
+        bufferedReader.close();
+
+        return sbResult.toString();
     }
 }
