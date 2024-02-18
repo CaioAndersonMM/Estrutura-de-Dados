@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -69,12 +70,14 @@ public class Questão32 {
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Erro ao carregar os dados do arquivo binário: " + e.getMessage());
         }
-        return null;
+        return new ArrayList<>(); // retorna ArrayList Vazio
     }
 
     private static void exibirPessoas(List<Pessoa> pessoas) {
-        for (Pessoa pessoa : pessoas) {
-            System.out.println(pessoa);
+        if (pessoas != null) {
+            for (Pessoa pessoa : pessoas) {
+                System.out.println(pessoa);
+            }
         }
     }
 }
