@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class Questão32 {
     private static String FILE_NAME = "pessoas.bin";
 
@@ -37,24 +36,20 @@ public class Questão32 {
             float peso = sc.nextFloat();
             System.out.print("Altura: ");
             float altura = sc.nextFloat();
-
             float imc = peso / (altura * altura);
+
             Pessoa pessoa = new Pessoa(cpf, nome, sexo, idade, peso, altura, imc);
             pessoas.add(pessoa);
-
         }
 
         salvarEmArquivo(pessoas);
-
         exibirPessoas(pessoas);
-
         sc.close();
 
     }
 
     private static void salvarEmArquivo(List<Pessoa> pessoas) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
-            //ESSE TRUE ADICIONA OS DADOS NOVOS AO FINAL DO ARQUIVO, PRESERVANDO OS ANTERIORES
             outputStream.writeObject(pessoas);
             System.out.println("Dados salvos em " + FILE_NAME);
         } catch (IOException e) {
