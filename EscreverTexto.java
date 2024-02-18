@@ -7,13 +7,13 @@ import java.io.IOException;
 public class EscreverTexto {
     public static void main(String[] args) {
         String caminho = "teste.txt";
-        String conteudo = "Caio é muito lindo, charmoso e amoroso";
+        String conteudo = "Caio é muito estudioso, ele vai passar em ED I \nCaio passará em ED I";
         String caminho2 = "teste2.txt";
         String conteudo2 = "A1;A2;" + "\n" + "B1;B2;";
 
-
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminho))) {
             writer.write(conteudo);
+            writer.close();
 
             BufferedWriter writer2 = new BufferedWriter(new FileWriter(caminho2));
             writer2.write(conteudo2);
@@ -25,11 +25,15 @@ public class EscreverTexto {
 
         try(BufferedReader reader = new BufferedReader(new FileReader(caminho))){
             String line = "";
+            String str = "";
             line = reader.readLine();
             while (line != null) {
                 System.out.println(line);
+                str+= line + "\n";
                 line = reader.readLine();
             }  
+
+            //System.out.println(str);
         } catch (IOException e) {
             System.out.println("Erro de Leitura");
         } catch (Exception e) {
@@ -42,7 +46,6 @@ public class EscreverTexto {
             String resultado = ""; 
             line = reader.readLine();
             while (line != null) {
-
                 String partes[] = line.split(";");
                 for (String parte : partes) {
                     resultado += "[" + parte + "]" + " "; 
