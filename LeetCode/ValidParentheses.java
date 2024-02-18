@@ -26,8 +26,6 @@ public class ValidParentheses {
                 if (pilha.contains(fechaduras.get(s.charAt(i)))) {
                     pilha.pop();
                 }
-            
-                System.out.println(pilha);
             }
         }
 
@@ -37,6 +35,6 @@ public class ValidParentheses {
     }
 
     public static void main(String[] args) {
-        isValid("([)");
+        isValid("()");
     }
 }

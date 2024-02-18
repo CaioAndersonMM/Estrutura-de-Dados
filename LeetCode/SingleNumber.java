@@ -18,14 +18,14 @@ public class SingleNumber {
                 resultado = entry.getKey();
             }
         }
-
+        
         System.out.println(resultado);
         return resultado;
 
     }
 
     public static void main(String[] args) {
-        int[] nums = { 2, 2, 1, 1, 3 };
+        int[] nums = { 2, 2, 1, 1, 3};
         singleNumber(nums);
     }
 }
