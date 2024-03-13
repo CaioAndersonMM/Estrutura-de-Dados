@@ -73,7 +73,8 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
         if (isEmpty()) {
             inicio = novo;
-            fim = novo;
+            fim = novo; 
+            size++;
             return true;
         }
 
