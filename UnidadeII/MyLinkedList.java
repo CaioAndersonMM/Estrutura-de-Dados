@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Stack;
 
 public class MyLinkedList<T> implements MyLinkedListInterface<T> {
  	class Node{
@@ -50,24 +51,6 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
-    }
-
-    @Override
-    public Object[] toArray() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
-    }
-
-    @Override
     public boolean add(T e) {
         Node novo = new Node(e);
 
@@ -111,39 +94,10 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
     }
 
     @Override
-    public boolean containsAll(Collection<?> c) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'containsAll'");
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends T> c) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addAll'");
-    }
-
-    @Override
-    public boolean addAll(int index, Collection<? extends T> c) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addAll'");
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeAll'");
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retainAll'");
-    }
-
-    @Override
     public void clear() {
        inicio = null;
        fim = null;
+       size = 0;
     }
 
     @Override
@@ -243,14 +197,64 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
 
     @Override
     public int indexOf(Object o) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'indexOf'");
+        Node inicial = inicio;
+        int index = 0;
+    
+        while (inicial != null) {
+            if (inicial.data.equals(o)) {
+                return index;
+            }
+            inicial = inicial.next;
+            index++;
+        }
+    
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'lastIndexOf'");
+        Node inicial = inicio;
+        int lastIndex = -1;
+        int index = 0;
+    
+        while (inicial != null) {
+            if (inicial.data.equals(o)) {
+                lastIndex = index; // Atualiza o índice da última ocorrência do objeto
+            }
+            inicial = inicial.next;
+            index++;
+        }
+    
+        return lastIndex;
+    }
+
+    public void show() {
+        Node inicial = inicio;
+
+        System.out.print("Lista (cabeça para cauda): ");
+        while (inicial != null) {
+            System.out.print(inicial.data + " ");
+            inicial = inicial.next;
+        }
+        System.out.println();
+    }
+
+    public void showReverse() {
+        Stack<T> stack = new Stack<>();
+        Node inicial = inicio;
+
+        // Empilha
+        while (inicial != null) {
+            stack.push(inicial.data);
+            inicial = inicial.next;
+        }
+
+        // Desempilha
+        System.out.print("Lista (cauda para cabeça): ");
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop() + " ");
+        }
+        System.out.println();
     }
 
     @Override
@@ -356,4 +360,51 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
         return removido.data;
     }
     
+    @Override
+    public Iterator<T> iterator() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+    }
+
+    @Override
+    public Object[] toArray() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'containsAll'");
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addAll'");
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends T> c) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addAll'");
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removeAll'");
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'retainAll'");
+    }
 }
