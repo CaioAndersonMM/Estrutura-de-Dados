@@ -8,7 +8,7 @@ public class MyFila<T> implements MyFilaInterface<T>{
     private int capacidade;
 
     public MyFila(int capacidade) {
-        this.elementos = (T[]) new Object[tamanho];
+        this.elementos = (T[]) new Object[capacidade];
         this.capacidade = capacidade;
         this.tamanho = 0;
         this.inicio = -1;
