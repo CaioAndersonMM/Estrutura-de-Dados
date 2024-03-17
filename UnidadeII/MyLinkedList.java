@@ -1,13 +1,14 @@
 package UnidadeII;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
 
-public class MyLinkedList<T> implements MyLinkedListInterface<T> {
- 	class Node{
+public class MyLinkedList<T> implements MyLinkedListInterface<T>, Serializable {
+ 	class Node implements Serializable{
         T data;    
         Node next;
         public Node(T data) {        	
