@@ -11,4 +11,7 @@ public interface MyLinkedListInterface<T> extends List<T>{
 
     T removeFirst();
     T removeLast();
+
+    void show();
+    void showReverse();
 }
