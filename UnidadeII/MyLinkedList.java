@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
 
+//Questão 3 - Lista Encadeada!
+
 public class MyLinkedList<T> implements MyLinkedListInterface<T>, Serializable {
+    
  	class Node implements Serializable{
         T data;    
         Node next;
@@ -28,15 +31,7 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T>, Serializable {
 		size = 0;
 	}
 
-    public int size() {
-        return this.size;
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    public boolean contains(Object o) {
+    public boolean contains(Object o) { //SearchNode
         Node p = inicio;
         if (p == null) {
             return false;
@@ -50,6 +45,31 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T>, Serializable {
         }
         return false;
     }
+
+    private Node searchNode(T o){
+	    Node p = inicio;
+
+	    while( p != null )
+	    {
+	        if( p.data.equals(o) ) {
+	            return p;
+	        }
+	        p = p.next;
+	    }
+	    return null;
+	}
+
+	
+	public T search(T o){
+		Node p = searchNode(o);
+		
+		if(p == null) {
+			return null;
+		} else {
+			return p.data;
+		}
+	}
+
 
     @Override
     public boolean add(T e) {
@@ -73,7 +93,7 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T>, Serializable {
         if (isEmpty()) {
             return false;
         } else {
-            if (inicio.data.equals(o)) {
+            if (inicio.data.equals(o)) { // Se o elemento a ser removido estiver no início da lista
                 inicio = inicio.next; // Atualiza o início da lista para o próximo nó
                 size--;
                 return true; 
@@ -85,7 +105,7 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T>, Serializable {
             
             if (inicial.next != null) {
                 Node removido = inicial.next;
-                inicial.next = inicial.next.next;
+                inicial.next = inicial.next.next; //o anterior ao removido (inicial) -> vai apontar para o próximo do removido
                 removido.next = null;
                 size--;
                 return true;
@@ -259,24 +279,6 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T>, Serializable {
     }
 
     @Override
-    public ListIterator<T> listIterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
-    }
-
-    @Override
-    public ListIterator<T> listIterator(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
-    }
-
-    @Override
-    public List<T> subList(int fromIndex, int toIndex) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'subList'");
-    }
-
-    @Override
     public void addFirst(T value) {
         Node novo = new Node(value);
         novo.next = inicio;
@@ -315,12 +317,10 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T>, Serializable {
     public T removeFirst() {
         if (isEmpty()) return null;
         
-        Node temp = inicio.next;
         Node removido = inicio;
-        inicio.next = null;
-        inicio = temp;
-        //pode ser melhorado
-        
+        inicio = inicio.next;
+        removido.next = null;
+
         size--; 
 
         if (inicio == null) { // Se o início agora for null, significa que a lista só tinha um elememento.
@@ -346,19 +346,27 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T>, Serializable {
 
         Node inicial = inicio; //vamos percorrer do inicio ao fim
 
-        //while (inicial.next.next != null) { //pego penultimo
-        //    inicial = inicial.next;
-        //}
-
         for (int i = 0; i < size - 2; i++) { //vai até o penultimo
             inicial = inicial.next;
         }
+
+        //while (inicial.next != tail) { JEITO MELHOR!
+        //    inicial = inicial.next;
+        //}
 
         // inicial é o penultimo
         inicial.next = null;
         fim = inicial;
         size--; 
         return removido.data;
+    }
+
+    public int size() {
+        return this.size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
     
     @Override
@@ -407,5 +415,23 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T>, Serializable {
     public boolean retainAll(Collection<?> c) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'retainAll'");
+    }
+    
+    @Override
+    public ListIterator<T> listIterator() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
+    }
+
+    @Override
+    public ListIterator<T> listIterator(int index) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
+    }
+
+    @Override
+    public List<T> subList(int fromIndex, int toIndex) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'subList'");
     }
 }
