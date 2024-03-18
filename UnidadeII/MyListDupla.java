@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+//Questão 4 - LINKED LIST DUPLA
+
 public class MyListDupla<T> implements MyListDuplaInterface<T> {
 
     public class Node {
@@ -58,21 +60,6 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
     }
 
     @Override
-    public Iterator iterator() {
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
-    }
-
-    @Override
-    public Object[] toArray() {
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
-    }
-
-    @Override
-    public Object[] toArray(Object[] a) {
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
-    }
-
-    @Override
     public boolean add(T e) {
         Node p = new Node(e);
         if (isEmpty()) {
@@ -121,31 +108,6 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
         }
 
         return false;
-    }
-
-    @Override
-    public boolean containsAll(Collection c) {
-        throw new UnsupportedOperationException("Unimplemented method 'containsAll'");
-    }
-
-    @Override
-    public boolean addAll(Collection c) {
-        throw new UnsupportedOperationException("Unimplemented method 'addAll'");
-    }
-
-    @Override
-    public boolean addAll(int index, Collection c) {
-        throw new UnsupportedOperationException("Unimplemented method 'addAll'");
-    }
-
-    @Override
-    public boolean removeAll(Collection c) {
-        throw new UnsupportedOperationException("Unimplemented method 'removeAll'");
-    }
-
-    @Override
-    public boolean retainAll(Collection c) {
-        throw new UnsupportedOperationException("Unimplemented method 'retainAll'");
     }
 
     @Override
@@ -201,7 +163,7 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
             Node novo = new Node(element);
             Node inicial = head;
 
-            for (int i = 0; i < index - 1; i++) { // Percorre um antes da posição desejada!
+            for (int i = 0; i < index - 1; i++) { // Percorre até um antes da posição desejada!
                 inicial = inicial.next;
             }
             Node posterior = inicial.next;
@@ -280,6 +242,7 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
         if (isEmpty()) {
             head = p;
             tail = p;
+            size++; //Tem que incrementar quando estiver vazia, havia esquecido
             return;
         }
 
@@ -297,6 +260,7 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
         if (isEmpty()) {
             head = p;
             tail = p;
+            size++; //Tem que incrementar quando estiver vazia, havia esquecido
             return;
         }
 
@@ -332,7 +296,7 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
         }
 
         head = head.next;
-        head.prev.next = null; // o anterior a nova cabeça terá o proximo anulado
+        head.prev.next = null; // o anterior a nova cabeça terá o next anulado
         head.prev = null;
 
         size--;
@@ -375,9 +339,10 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
             inicial = inicial.next;
         }
 
-        if (inicial == null) {
+        if (inicial == null) { //Não encontrado
             return false;
         }
+
         Node novo = new Node(dado);
 
         novo.prev = inicial;
@@ -448,5 +413,44 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
     public List subList(int fromIndex, int toIndex) {
         throw new UnsupportedOperationException("Unimplemented method 'subList'");
     }
+    
+    @Override
+    public Iterator iterator() {
+        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+    }
 
+    @Override
+    public Object[] toArray() {
+        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+    }
+
+    @Override
+    public Object[] toArray(Object[] a) {
+        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+    }
+
+    @Override
+    public boolean containsAll(Collection c) {
+        throw new UnsupportedOperationException("Unimplemented method 'containsAll'");
+    }
+
+    @Override
+    public boolean addAll(Collection c) {
+        throw new UnsupportedOperationException("Unimplemented method 'addAll'");
+    }
+
+    @Override
+    public boolean addAll(int index, Collection c) {
+        throw new UnsupportedOperationException("Unimplemented method 'addAll'");
+    }
+
+    @Override
+    public boolean removeAll(Collection c) {
+        throw new UnsupportedOperationException("Unimplemented method 'removeAll'");
+    }
+
+    @Override
+    public boolean retainAll(Collection c) {
+        throw new UnsupportedOperationException("Unimplemented method 'retainAll'");
+    }
 }
