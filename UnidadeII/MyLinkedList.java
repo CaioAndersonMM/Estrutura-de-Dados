@@ -95,6 +95,15 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T>, Serializable {
         } else {
             if (inicio.data.equals(o)) { // Se o elemento a ser removido estiver no início da lista
                 inicio = inicio.next; // Atualiza o início da lista para o próximo nó
+
+                if (inicio == null) {// se o novo inicio for nulo, só existia o anterior na lista
+                    clear();
+                }
+
+                if (inicio.next == null) { //So ficou ele na lista
+                    fim = inicio;
+                }
+
                 size--;
                 return true; 
             }
@@ -196,6 +205,10 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T>, Serializable {
             return null;
         }
 
+        if (index == 0) { // Se o índice é 0, remova o primeiro nó
+            return removeFirst();
+        }
+
         Node p = inicio;
 
         for (int i = 0; i < index - 1; i++) {
@@ -205,12 +218,13 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T>, Serializable {
         //após chegar no indice anterior ao que eu queria, então:
         Node removido = p.next;
         p.next = p.next.next; //o nó anterior vai referenciar o proximo do próximo, pulando o que eu queria...
-        removido.next = null; //desvinculando ele da list
 
         if (p.next == null) { // Se o próximo nó for nulo após a remoção, atualize a referência de "fim"
             fim = p;
         }
 
+        removido.next = null; //desvinculando ele da list
+        
         size--;
         return removido.data;
 
