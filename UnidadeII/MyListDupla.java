@@ -32,6 +32,12 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
         this.capacity = tamanho;
     }
 
+    public MyListDupla() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
     @Override
     public int size() {
         return this.size;
@@ -183,6 +189,10 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
             throw new IndexOutOfBoundsException("Index out of bounds");
         }
 
+        if (index == 0) {
+            return removeFirst();
+        }
+
         Node inicial = head;
 
         for (int i = 0; i < index; i++) {
@@ -193,8 +203,12 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
 
         if (removido.next != null) {
             Node posterior = removido.next;
+            Node anterior = removido.prev;
             posterior.prev = removido.prev;
+            anterior.next = posterior;
             removido.next = null;
+        } else { //Se o proximo for null -> então o fim deve ser atualizado
+            tail = removido.prev;
         }
 
         removido.prev = null;
@@ -288,11 +302,14 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
             return null;
         }
 
+        Node removido = head;
+
         if (size == 1) {
             // Se houver apenas um elemento na lista
             head = null;
             tail = null;
-            return null;
+            size--;
+            return removido.data;
         }
 
         head = head.next;
@@ -309,14 +326,16 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
             return null;
         }
 
+        Node removido = tail;
+
         if (size == 1) {
             // Se houver apenas um elemento na lista
             head = null;
             tail = null;
-            return null;
+            size--;
+            return removido.data;
         }
 
-        Node removido = tail;
         tail = tail.prev;
         tail.next = null;
         removido.prev = null; // desconecto a ligação do ultimo com a minha lista
@@ -347,6 +366,7 @@ public class MyListDupla<T> implements MyListDuplaInterface<T> {
 
         novo.prev = inicial;
         novo.next = inicial.next;
+        
         if (inicial.next != null) {
             inicial.next.prev = novo;
         }
