@@ -51,16 +51,16 @@ public class Ordenação {
     public void quickSort(int vetor[], int inivet, int fimvet){
         int i = inivet;
         int j = fimvet;
-        int pivo = vetor[(i+j / 2)];
+        int pivo = vetor[(i+j)/2];
 
         while (i < j) {
 
             while (vetor[i] < pivo) {
-                i = i++;
+                i++;
             }
 
             while (vetor[j] > pivo) {
-                j = j--;
+                j--;
             }
 
             if (i <= j) {
@@ -81,7 +81,7 @@ public class Ordenação {
     }
 
     public void shellSort(int vetor[]){
-        int h = 0;
+        int h = 1;
         while (h < vetor.length) {
             h = 3 * h + 1;
         }
